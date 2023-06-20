@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class MusicCollection {
     private int numMusics;
@@ -67,6 +68,30 @@ public class MusicCollection {
             }
         }
         return null;
+    }
+
+    public void updateMusic(MusicCollection allMusics, int id, String title, Duration duration, String authors, 
+        Date date, String genre){
+        StructMusic m = allMusics.searchMusic(id);
+        if (m != null){
+            m.setTitle(title);
+            m.setDuration(duration);
+            m.setAuthors(authors);
+            m.setDate(date);
+            m.setGenre(genre);
+        } 
+    }
+
+    public void updateMusic(MusicCollection allMusics, String oldTitle, String newTitle, Duration duration, String authors, 
+        Date date, String genre){
+        StructMusic m = allMusics.searchMusic(oldTitle);
+        if (m != null){
+            m.setTitle(newTitle);
+            m.setDuration(duration);
+            m.setAuthors(authors);
+            m.setDate(date);
+            m.setGenre(genre);
+        } 
     }
 
     public void printMusics() {

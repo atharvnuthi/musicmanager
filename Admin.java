@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Admin extends StructUser {
     public Admin(String nome, String login, String senha) {
         super(nome, login, senha);
@@ -11,13 +13,18 @@ public class Admin extends StructUser {
         return allMusics.searchMusic(title);
     }
     
-    //Pq tem 2 searchs? N era pra ter so o search pelo titulo n?
     public StructMusic searchMusic(MusicCollection allMusics, int id) {
         return allMusics.searchMusic(id);
     }
 
-    public void updateMusic(MusicCollection allMusics, int id){
-        // N sei como será atualizada a música
+    public void updateMusic(MusicCollection allMusics, int id, String title, Duration duration, String authors, 
+        Date date, String genre){
+        allMusics.updateMusic(allMusics, id, title, duration, authors, date, genre);
+    }
+
+    public void updateMusic(MusicCollection allMusics, String oldTitle, String newTitle, Duration duration, String authors, 
+        Date date, String genre){
+        allMusics.updateMusic(allMusics, oldTitle, newTitle, duration, authors, date, genre);
     }
 
     public void removeMusic(MusicCollection allMusics, int id) {
@@ -41,7 +48,6 @@ public class Admin extends StructUser {
         user.setIsUser(false);
     }
 
-    //Pq tem 2 searchs? N era pra ter so o search pelo login n? (msm coisa do search musica)
     public User searchUser(UserCollection allUsers, int id) {
         return allUsers.searchUser(id);
     }
