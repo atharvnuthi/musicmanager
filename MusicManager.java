@@ -5,6 +5,6 @@ public class MusicManager {
         public static UserCollection allUsers = new UserCollection();
 
         public static void main(String[] args) {
-                // feel feel to play!
+                System.out.println("Oi");
         }
 }
