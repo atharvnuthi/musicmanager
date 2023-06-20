@@ -10,7 +10,8 @@ public class Admin extends StructUser {
     public StructMusic searchMusic(MusicCollection allMusics, String title) {
         return allMusics.searchMusic(title);
     }
-
+    
+    //Pq tem 2 searchs? N era pra ter so o search pelo titulo n?
     public StructMusic searchMusic(MusicCollection allMusics, int id) {
         return allMusics.searchMusic(id);
     }

@@ -5,6 +5,6 @@ public class MusicManager {
         public static UserCollection allUsers = new UserCollection();
 
         public static void main(String[] args) {
-                System.out.println("Oi");
+                
         }
 }
