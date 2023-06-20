@@ -16,6 +16,10 @@ public class Admin extends StructUser {
         return allMusics.searchMusic(id);
     }
 
+    public void updateMusic(MusicCollection allMusics, int id){
+        // N sei como será atualizada a música
+    }
+
     public void removeMusic(MusicCollection allMusics, int id) {
         allMusics.removeMusic(id);
     }
