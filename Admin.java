@@ -41,6 +41,7 @@ public class Admin extends StructUser {
         user.setIsUser(false);
     }
 
+    //Pq tem 2 searchs? N era pra ter so o search pelo login n? (msm coisa do search musica)
     public User searchUser(UserCollection allUsers, int id) {
         return allUsers.searchUser(id);
     }
