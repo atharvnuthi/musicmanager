@@ -5,34 +5,89 @@ public class Admin extends StructUser {
         super(nome, login, senha);
     }
 
-    public void addMusic(MusicCollection allMusics, StructMusic music) {
-        allMusics.addMusic(music);
+     //Novo metodo
+    public void addMusic(MusicCollection collection, StructMusic music) {
+	boolean musicExists = false;
+        for (StructMusic m : collection.getAllMusics()) {
+            if (m.getTitle().equals(music.getTitle())) {
+                musicExists = true;
+                break;
+            }
+        }
+        if (!musicExists) {
+            collection.getAllMusics().add(music);
+            collection.addNumMusics();
+        }
     }
 
-    public StructMusic searchMusic(MusicCollection allMusics, String title) {
-        return allMusics.searchMusic(title);
+     //Novo metodo
+    public StructMusic searchMusic(MusicCollection collection, String title) {
+        for (StructMusic m : collection.getAllMusics()) {
+            if (m.getTitle() == title) {
+                return m;
+            }
+        }
+        return null;
     }
     
-    public StructMusic searchMusic(MusicCollection allMusics, int id) {
-        return allMusics.searchMusic(id);
+     //Novo metodo
+    public StructMusic searchMusic(MusicCollection collection, int id) {
+        for (StructMusic m : collection.getAllMusics()) {
+            if (m.getId() == id) {
+                return m;
+            }
+        }
+        return null;
     }
 
-    public void updateMusic(MusicCollection allMusics, int id, String title, Duration duration, String authors, 
+     //Novo metodo
+    public StructMusic removeMusic(MusicCollection collection, int id) {
+        for (StructMusic m : collection.getAllMusics()) {
+            if (m.getId() == id) {
+                collection.getAllMusics().remove(m);
+                collection.subNumMusics();
+                return m;
+            }
+        }
+        return null;
+    }
+
+     //Novo metodo
+    public StructMusic removeMusic(MusicCollection collection, String title) {
+        for (StructMusic m : collection.getAllMusics()) {
+            if (m.getTitle() == title) {
+                collection.getAllMusics().remove(m);
+                collection.subNumMusics();
+                return m;
+            }
+        }
+        return null;
+    }
+
+     //Novo metodo
+    public void updateMusic(MusicCollection collection, int id, String title, Duration duration, String authors, 
         Date date, String genre){
-        allMusics.updateMusic(allMusics, id, title, duration, authors, date, genre);
+        StructMusic m = searchMusic(collection, id);
+        if (m != null){
+            m.setTitle(title);
+            m.setDuration(duration);
+            m.setAuthors(authors);
+            m.setDate(date);
+            m.setGenre(genre);
+        } 
     }
 
-    public void updateMusic(MusicCollection allMusics, String oldTitle, String newTitle, Duration duration, String authors, 
+     //Novo metodo
+    public void updateMusic(MusicCollection collection, String oldTitle, String newTitle, Duration duration, String authors, 
         Date date, String genre){
-        allMusics.updateMusic(allMusics, oldTitle, newTitle, duration, authors, date, genre);
-    }
-
-    public void removeMusic(MusicCollection allMusics, int id) {
-        allMusics.removeMusic(id);
-    }
-
-    public void removeMusic(MusicCollection allMusics, String title) {
-        allMusics.removeMusic(title);
+        StructMusic m = searchMusic(collection, oldTitle);
+        if (m != null){
+            m.setTitle(newTitle);
+            m.setDuration(duration);
+            m.setAuthors(authors);
+            m.setDate(date);
+            m.setGenre(genre);
+        } 
     }
 
     public void printMusics(MusicCollection allMusics) {

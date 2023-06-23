@@ -15,83 +15,19 @@ public class MusicCollection {
         return numMusics;
     }
 
-    public void addMusic(StructMusic music) {
-        boolean musicExists = false;
-        for (StructMusic m : allMusics) {
-            if (m.getTitle().equals(music.getTitle())) {
-                musicExists = true;
-                break;
-            }
-        }
-
-        if (!musicExists) {
-            allMusics.add(music);
-            numMusics++;
-        }
+    //Novo metodo
+    public Collection<StructMusic> getAllMusics(){
+        return this.allMusics;
     }
 
-    public StructMusic searchMusic(String title) {
-        for (StructMusic m : allMusics) {
-            if (m.getTitle() == title) {
-                return m;
-            }
-        }
-        return null;
+     //Novo metodo
+    public void addNumMusics(){
+        this.numMusics++;
     }
-
-    public StructMusic searchMusic(int id) {
-        for (StructMusic m : allMusics) {
-            if (m.getId() == id) {
-                return m;
-            }
-        }
-        return null;
-    }
-
-    public StructMusic removeMusic(int id) {
-        for (StructMusic m : allMusics) {
-            if (m.getId() == id) {
-                allMusics.remove(m);
-                this.numMusics--;
-                return m;
-            }
-        }
-        return null;
-    }
-
-    public StructMusic removeMusic(String title) {
-        for (StructMusic m : allMusics) {
-            if (m.getTitle() == title) {
-                allMusics.remove(m);
-                this.numMusics--;
-                return m;
-            }
-        }
-        return null;
-    }
-
-    public void updateMusic(MusicCollection allMusics, int id, String title, Duration duration, String authors, 
-        Date date, String genre){
-        StructMusic m = allMusics.searchMusic(id);
-        if (m != null){
-            m.setTitle(title);
-            m.setDuration(duration);
-            m.setAuthors(authors);
-            m.setDate(date);
-            m.setGenre(genre);
-        } 
-    }
-
-    public void updateMusic(MusicCollection allMusics, String oldTitle, String newTitle, Duration duration, String authors, 
-        Date date, String genre){
-        StructMusic m = allMusics.searchMusic(oldTitle);
-        if (m != null){
-            m.setTitle(newTitle);
-            m.setDuration(duration);
-            m.setAuthors(authors);
-            m.setDate(date);
-            m.setGenre(genre);
-        } 
+    
+     //Novo metodo
+    public void subNumMusics(){
+        this.numMusics--;
     }
 
     public void printMusics() {
