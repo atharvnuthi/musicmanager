@@ -17,7 +17,7 @@ public class UserCollection {
     public void addUser(User user) {
         boolean userExists = false;
         for (User u : allUsers) {
-            if (u.getLogin() == user.getLogin()) {
+            if (u.getLogin().equals(user.getLogin())) {
                 userExists = true;
                 break;
             }
@@ -33,7 +33,7 @@ public class UserCollection {
 
     public User searchUser(String login) {
         for (User u : allUsers) {
-            if (u.getLogin() == login) {
+            if (u.getLogin().equals(login)) {
                 return u;
             }
         }
@@ -62,7 +62,7 @@ public class UserCollection {
 
     public User removeUser(String login) {
         for (User u : allUsers) {
-            if (u.getLogin() == login) {
+            if (u.getLogin().equals(login)) {
                 allUsers.remove(u);
                 this.numUsers--;
                 return u;
