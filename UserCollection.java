@@ -10,21 +10,22 @@ public class UserCollection {
         this.allUsers = new ArrayList<User>();
     }
 
-    public User register(String name, String login, String password) {
+    public boolean register(String name, String login, String password) {
         boolean userExists = false;
         for (User u : allUsers) {
             if (u.getLogin().equals(login)) {
                 userExists = true;
-                break;
+                System.out.println("User already exist");
+                return false;
             }
         }
         if (!userExists) {
             User sendUser = new User(name, login, password);
             allUsers.add(sendUser);
             numUsers++;
-            return sendUser;
+            return true;
         }
-        return null;
+        return false;
     }
 
     public User login(String login, String password) {
@@ -33,6 +34,16 @@ public class UserCollection {
                 return u;
             }
         }
+        return null;
+    }
+
+    public User searchUser(String login){
+        for (User u : allUsers){
+            if (u.getLogin().equals(login)){
+                return u;
+            }
+        }
+
         return null;
     }
 
