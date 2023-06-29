@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 public class MusicCollection {
     private int numMusics;
@@ -15,18 +14,15 @@ public class MusicCollection {
         return numMusics;
     }
 
-    //Novo metodo
-    public Collection<StructMusic> getAllMusics(){
+    public Collection<StructMusic> getAllMusics() {
         return this.allMusics;
     }
 
-     //Novo metodo
-    public void addNumMusics(){
+    public void incrementMusics() {
         this.numMusics++;
     }
-    
-     //Novo metodo
-    public void subNumMusics(){
+
+    public void decrementMusics() {
         this.numMusics--;
     }
 

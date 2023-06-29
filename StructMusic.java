@@ -19,6 +19,11 @@ public abstract class StructMusic {
         this.id = uniqueMusicIds;
     }
 
+    public String toString() {
+        return "Title: " + title + "\nDuration: " + duration + "\nAuthors: " + authors + "\nDate: " + date + "\nGenre: "
+                + genre;
+    }
+
     public int getId() {
         return id;
     }

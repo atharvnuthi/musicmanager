@@ -10,64 +10,45 @@ public class UserCollection {
         this.allUsers = new ArrayList<User>();
     }
 
-    public int getNumUsers() {
-        return numUsers;
-    }
-
-    public void addUser(User user) {
+    public User register(String name, String login, String password) {
         boolean userExists = false;
         for (User u : allUsers) {
-            if (u.getLogin().equals(user.getLogin())) {
+            if (u.getLogin().equals(login)) {
                 userExists = true;
                 break;
             }
         }
-
         if (!userExists) {
-            allUsers.add(user);
+            User sendUser = new User(name, login, password);
+            allUsers.add(sendUser);
             numUsers++;
+            return sendUser;
         }
-        allUsers.add(user);
-        numUsers++;
+        return null;
     }
 
-    public User searchUser(String login) {
+    public User login(String login, String password) {
         for (User u : allUsers) {
-            if (u.getLogin().equals(login)) {
+            if (u.getLogin().equals(login) && u.getPassword().equals(password)) {
                 return u;
             }
         }
         return null;
     }
 
-    public User searchUser(int id) {
-        for (User u : allUsers) {
-            if (u.getId() == id) {
-                return u;
-            }
-        }
-        return null;
+    public int getNumUsers() {
+        return numUsers;
     }
 
-    public User removeUser(int id) {
-        for (User u : allUsers) {
-            if (u.getId() == id) {
-                allUsers.remove(u);
-                this.numUsers--;
-                return u;
-            }
-        }
-        return null;
+    public void incrementUsers() {
+        this.numUsers++;
     }
 
-    public User removeUser(String login) {
-        for (User u : allUsers) {
-            if (u.getLogin().equals(login)) {
-                allUsers.remove(u);
-                this.numUsers--;
-                return u;
-            }
-        }
-        return null;
+    public void decrementUsers() {
+        this.numUsers--;
+    }
+
+    public Collection<User> getAllUsers() {
+        return this.allUsers;
     }
 }
