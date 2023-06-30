@@ -8,9 +8,9 @@ An OOP Project in Java
 - text file handling 
 
 ## Structure
-Admin, User C StructUser <br>
-MusicalInstrument, Song C StructMusic <br>
-Users -> UserCollection <br>
-StructMusics (MusicalInstrument & Song) -> MusicCollection <br>
-MusicalInstrument (String musicSheet, Duration duration) <br>
-Song (Lyrics lyrics, Duration duration)
+StructUser ⊃ Admin & User <br>
+StructMusic ⊃ MusicalInstrument & Song <br>
+Users => UserCollection <br>
+StructMusic (MusicalInstrument & Song) => MusicCollection <br>
+MusicalInstrument ⊃ String musicSheet, Duration duration <br>
+Song ⊃ Lyrics lyrics, Duration duration
