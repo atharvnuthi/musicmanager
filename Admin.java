@@ -102,9 +102,9 @@ public class Admin extends StructUser {
         }
     }
 
-    public void removeUser(UserCollection allUsers, User user) {
+    public void removeUser(UserCollection allUsers, String login) {
         for (User u : allUsers.getAllUsers()) {
-            if (u.getLogin() == user.getLogin()) {
+            if (u.getLogin() == login) {
                 allUsers.getAllUsers().remove(u);
                 allUsers.decrementUsers();
             }
