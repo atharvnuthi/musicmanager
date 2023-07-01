@@ -42,7 +42,7 @@ public class Lyrics {
     }
 
     public String getFileLyrics() {
-        return fileLyrics;
+        return text;
     }
 
     public void setFileLyrics(String fileLyrics) {
