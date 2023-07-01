@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Lyrics {
     private String fileLyrics;
-    private String text;
+    private String text = "";
 
     public Lyrics(String fileLyrics) {
         FileReader fr = null;
