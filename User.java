@@ -14,7 +14,7 @@ public class User extends StructUser {
 
     public void addMusic(MusicCollection allMusics, StructMusic music) {
         boolean musicExists = false;
-        for (StructMusic m : myMusics.getAllMusics()) {
+        for (StructMusic m : allMusics.getAllMusics()) {
             if (m.getTitle().equals(music.getTitle())) {
                 musicExists = true;
                 break;
