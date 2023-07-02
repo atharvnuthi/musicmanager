@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+// Letra
 public class Lyrics {
     private String fileLyrics;
     private String text = "";

@@ -1,3 +1,4 @@
+// Duração
 class Duration {
     private int min;
     private int sec;

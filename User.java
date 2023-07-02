@@ -12,6 +12,8 @@ public class User extends StructUser {
         return "Name: " + this.getName() + "\nLogin: " + this.getLogin() + "\nPassword: " + this.getPassword();
     }
 
+    // User is restricted to myMusics and cannot modify allMusics
+
     public void addMusic(MusicCollection allMusics, StructMusic music) {
         boolean musicExists = false;
         for (StructMusic m : myMusics.getAllMusics()) {
@@ -20,11 +22,9 @@ public class User extends StructUser {
                 break;
             }
         }
-        if (!musicExists) {
+        if (musicExists) { // add from main collection
             myMusics.getAllMusics().add(music);
-            allMusics.getAllMusics().add(music);
             myMusics.incrementMusics();
-            allMusics.incrementMusics();
         }
     }
 

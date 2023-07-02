@@ -10,15 +10,12 @@ public class MusicManager {
         private static Admin mainAdmin = new Admin("musicmanageradmin", "mma", "mma123");
         private static StructUser currentUser = null;
         private static User doUser = null;
+
         private static boolean isAdmin = false;
         private static boolean isUser = false;
 
         private static Scanner scanner = new Scanner(System.in);
-        private static String name = null;
-        private static String login = null;
-        private static String password = null;
-        private static String checkPassword = null;
-        private static String type = null;
+        private static String currentUserName = null;
 
         public static void main(String[] args) {
                 MusicManager m = new MusicManager();
@@ -26,11 +23,11 @@ public class MusicManager {
                 while (ISMAIN == true) {
                         m.loginSystem();
                         if (isAdmin) {
-                                System.out.println("\nAdmin Menu: " + name);
+                                System.out.println("\nAdmin Menu: " + currentUserName);
                                 m.adminMenuManager();
                         }
                         if (isUser) {
-                                System.out.println("\nUser Menu: " + name);
+                                System.out.println("\nUser Menu: " + currentUserName);
                                 m.userMenuManager();
                         }
                 }
@@ -47,6 +44,10 @@ public class MusicManager {
         private void loginSystem() {
                 boolean isExit = false;
                 boolean isSigned = false;
+                String login = null;
+                String password = null;
+                String checkPassword = null;
+                String type = null;
                 while (currentUser == null && isExit == false) {
                         initialPrint();
                         type = null;
@@ -86,7 +87,7 @@ public class MusicManager {
                                                                 mainAdmin.getPassword().equals(password)) {
                                                         currentUser = mainAdmin;
                                                 }
-                                                name = currentUser.getName();
+                                                currentUserName = currentUser.getName();
                                         }
                                         if (isUser) {
                                                 System.out.print("Login: ");
@@ -104,7 +105,7 @@ public class MusicManager {
                                                         doUser = allUsers.searchUser(login);
 
                                                 }
-                                                name = currentUser.getName();
+                                                currentUserName = currentUser.getName();
                                         }
                                         break;
 
