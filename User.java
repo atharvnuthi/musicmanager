@@ -12,6 +12,10 @@ public class User extends StructUser {
         return "Name: " + this.getName() + "\nLogin: " + this.getLogin() + "\nPassword: " + this.getPassword();
     }
 
+    public MusicCollection getMyMusics() {
+        return myMusics;
+    }
+
     // User is restricted to myMusics and cannot modify allMusics
 
     public void addMusic(MusicCollection allMusics, StructMusic music) {
@@ -22,15 +26,18 @@ public class User extends StructUser {
                 break;
             }
         }
-        if (musicExists) { // add from main collection
+        if (musicExists == false) { // add from main collection
+            allMusics.getAllMusics().add(music);
+            allMusics.incrementMusics();
             myMusics.getAllMusics().add(music);
             myMusics.incrementMusics();
+            System.out.println("Music added!");
         }
     }
 
     public StructMusic searchMusic(String title) {
         for (StructMusic m : myMusics.getAllMusics()) {
-            if (m.getTitle() == title) {
+            if (m.getTitle().equals(title)) {
                 return m;
             }
         }
@@ -51,6 +58,7 @@ public class User extends StructUser {
             if (m.getId() == id) {
                 myMusics.getAllMusics().remove(m);
                 myMusics.decrementMusics();
+                System.out.println("Music removed!");
                 return m;
             }
         }
@@ -62,6 +70,7 @@ public class User extends StructUser {
             if (m.getTitle() == title) {
                 myMusics.getAllMusics().remove(m);
                 myMusics.decrementMusics();
+                System.out.println("Music removed!");
                 return m;
             }
         }
@@ -77,6 +86,7 @@ public class User extends StructUser {
             m.setAuthors(authors);
             m.setDate(date);
             m.setGenre(genre);
+            System.out.println("Music updated!");
         }
     }
 
@@ -89,12 +99,11 @@ public class User extends StructUser {
             m.setAuthors(authors);
             m.setDate(date);
             m.setGenre(genre);
+            System.out.println("Music updated!");
         }
     }
 
     public void printMusics() {
-        if (myMusics != null) {
-            myMusics.printMusics();
-        }
+        myMusics.printMusics();
     }
 }

@@ -16,12 +16,13 @@ public class Admin extends StructUser {
         if (!musicExists) {
             allMusics.getAllMusics().add(music);
             allMusics.incrementMusics();
+            System.out.println("Music added!");
         }
     }
 
     public StructMusic searchMusic(MusicCollection allMusics, String title) {
         for (StructMusic m : allMusics.getAllMusics()) {
-            if (m.getTitle() == title) {
+            if (m.getTitle().equals(title)) {
                 return m;
             }
         }
@@ -42,6 +43,7 @@ public class Admin extends StructUser {
             if (m.getId() == id) {
                 allMusics.getAllMusics().remove(m);
                 allMusics.decrementMusics();
+                System.out.println("Music removed!");
                 return m;
             }
         }
@@ -53,6 +55,7 @@ public class Admin extends StructUser {
             if (m.getTitle() == title) {
                 allMusics.getAllMusics().remove(m);
                 allMusics.decrementMusics();
+                System.out.println("Music removed!");
                 return m;
             }
         }
@@ -68,6 +71,7 @@ public class Admin extends StructUser {
             m.setAuthors(authors);
             m.setDate(date);
             m.setGenre(genre);
+            System.out.println("Music updated!");
         }
     }
 
@@ -80,6 +84,7 @@ public class Admin extends StructUser {
             m.setAuthors(authors);
             m.setDate(date);
             m.setGenre(genre);
+            System.out.println("Music updated!");
         }
     }
 
@@ -99,14 +104,17 @@ public class Admin extends StructUser {
         if (!userExists) {
             allUsers.getAllUsers().add(user);
             allUsers.incrementUsers();
+            System.out.println("User added!");
         }
     }
 
     public void removeUser(UserCollection allUsers, String login) {
         for (User u : allUsers.getAllUsers()) {
-            if (u.getLogin() == login) {
+            if (u.getLogin().equals(login)) {
                 allUsers.getAllUsers().remove(u);
                 allUsers.decrementUsers();
+                System.out.println("User removed!");
+                break;
             }
         }
     }

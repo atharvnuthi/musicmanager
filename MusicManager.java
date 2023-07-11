@@ -8,6 +8,7 @@ public class MusicManager {
         private static boolean ISMAIN = true;
 
         private static Admin mainAdmin = new Admin("musicmanageradmin", "mma", "mma123");
+
         private static StructUser currentUser = null;
         private static User doUser = null;
 
@@ -43,7 +44,7 @@ public class MusicManager {
 
         private void loginSystem() {
                 boolean isExit = false;
-                boolean isSigned = false;
+                boolean isSignedUp = false;
                 String login = null;
                 String password = null;
                 String checkPassword = null;
@@ -51,7 +52,6 @@ public class MusicManager {
                 while (currentUser == null && isExit == false) {
                         initialPrint();
                         type = null;
-                        boolean isCancel = false;
                         switch (scanner.nextLine()) {
                                 case "*":
                                         isExit = true;
@@ -86,8 +86,8 @@ public class MusicManager {
                                                 if (mainAdmin.getLogin().equals(login) &&
                                                                 mainAdmin.getPassword().equals(password)) {
                                                         currentUser = mainAdmin;
+                                                        currentUserName = currentUser.getName();
                                                 }
-                                                currentUserName = currentUser.getName();
                                         }
                                         if (isUser) {
                                                 System.out.print("Login: ");
@@ -100,49 +100,55 @@ public class MusicManager {
                                                 if (password.equals("*")) {
                                                         break;
                                                 }
-                                                if (allUsers.searchUser(login).getPassword().equals(password)) {
-                                                        currentUser = allUsers.searchUser(login);
-                                                        doUser = allUsers.searchUser(login);
-
+                                                User foundUser = allUsers.searchUser(login);
+                                                if (foundUser != null && foundUser.getPassword().equals(password)) {
+                                                        currentUser = foundUser;
+                                                        doUser = foundUser;
+                                                        currentUserName = currentUser.getName();
+                                                        System.out.println("User logged in!\n");
+                                                } else {
+                                                        System.out.println(
+                                                                        "Invalid login or password. Please try again.\n");
                                                 }
-                                                currentUserName = currentUser.getName();
                                         }
                                         break;
 
                                 case "2":
-                                        while (isSigned == false && isCancel == false) {
+                                        while (isSignedUp == false) {
                                                 System.out.print("Name: ");
                                                 String name = scanner.nextLine();
                                                 if (name.equals("*")) {
-                                                        isCancel = true;
                                                         break;
                                                 }
                                                 System.out.print("Login: ");
                                                 login = scanner.nextLine();
                                                 if (login.equals("*")) {
-                                                        isCancel = true;
                                                         break;
                                                 }
                                                 do {
                                                         System.out.print("Password: ");
                                                         password = scanner.nextLine();
                                                         if (password.equals("*")) {
-                                                                isCancel = true;
                                                                 break;
                                                         }
                                                         System.out.print("Type the same password again: ");
                                                         checkPassword = scanner.nextLine();
                                                         if (checkPassword.equals("*")) {
-                                                                isCancel = true;
                                                                 break;
                                                         }
                                                         if (password.equals(checkPassword) == false) {
                                                                 System.out.println("Different passwords, try again!");
                                                         }
                                                 } while (password.equals(checkPassword) == false);
-                                                isSigned = allUsers.register(name, login, password);
+                                                isSignedUp = allUsers.register(name, login, password);
+                                                if (isSignedUp) {
+                                                        System.out.println("User signed up!\n");
+                                                        isSignedUp = false;
+                                                        break;
+                                                } else {
+                                                        System.out.println("Login already exists, try again!\n");
+                                                }
                                         }
-                                        System.out.println("User signed up!");
                                         break;
                         }
 
@@ -186,14 +192,17 @@ public class MusicManager {
                                         System.out.print("Musical Instrument (M) or Song (S): ");
                                         String type = scanner.nextLine();
                                         if (type.equals("M")) {
-                                                mainAdmin.addMusic(allMusics, new MusicalInstrument("title",
-                                                                new Duration(0, 0), "authors", new Date(), "genre",
-                                                                "sheetMusicName"));
+                                                mainAdmin.addMusic(allMusics,
+                                                                new MusicalInstrument("MusicalInstrument",
+                                                                                new Duration(1, 0), "authorMI",
+                                                                                new Date(), "genreIns",
+                                                                                "sheetMusicName"));
                                         }
                                         if (type.equals("S")) {
-                                                mainAdmin.addMusic(allMusics, new Song("title", new Duration(0, 0),
-                                                                "authors", new Date(), "genre",
-                                                                new Lyrics("lyrics.txt")));
+                                                mainAdmin.addMusic(allMusics,
+                                                                new Song("Song", new Duration(2, 0),
+                                                                                "authorS", new Date(), "genreSong",
+                                                                                new Lyrics("lyrics.txt")));
                                         }
                                         break;
 
@@ -202,17 +211,20 @@ public class MusicManager {
                                         String title = scanner.nextLine();
                                         StructMusic tempMusic = mainAdmin.searchMusic(allMusics, title);
                                         if (tempMusic != null) {
-                                                System.out.println(tempMusic.toString());
+                                                tempMusic.printMusic();
+                                        } else {
+                                                System.out.println("No music found!");
                                         }
                                         break;
 
                                 case "3":
-                                        mainAdmin.updateMusic(allMusics, "title", "new title", new Duration(0, 1),
-                                                        "new authors", new Date(), "new genre");
+                                        mainAdmin.updateMusic(allMusics, "Song", "New Song",
+                                                        new Duration(3, 0),
+                                                        "authorsNS", new Date(), "genreNewSong");
                                         break;
 
                                 case "4":
-                                        mainAdmin.removeMusic(allMusics, "title");
+                                        mainAdmin.removeMusic(allMusics, "New Song");
                                         break;
 
                                 case "5":
@@ -220,7 +232,7 @@ public class MusicManager {
                                         break;
 
                                 case "6":
-                                        mainAdmin.addUser(allUsers, new User("name", "login", "password"));
+                                        mainAdmin.addUser(allUsers, new User("Atharv", "athu", "athu123"));
                                         break;
 
                                 case "7":
@@ -233,7 +245,7 @@ public class MusicManager {
                                         break;
 
                                 case "8":
-                                        mainAdmin.removeUser(allUsers, "login");
+                                        mainAdmin.removeUser(allUsers, "athu");
                                         break;
                         }
                 }
@@ -256,24 +268,25 @@ public class MusicManager {
                                         System.out.print("Musical Instrument (M) or Song (S): ");
                                         String type = scanner.nextLine();
                                         if (type.equals("M")) {
-                                                doUser.addMusic(allMusics, new MusicalInstrument("title",
-                                                                new Duration(0, 0), "authors", new Date(), "genre",
+                                                doUser.addMusic(allMusics, new MusicalInstrument("MyMusicalInstrument",
+                                                                new Duration(1, 0), "myAuthor", new Date(), "myGenre",
                                                                 "sheetMusicName"));
+
                                         }
                                         if (type.equals("S")) {
-                                                doUser.addMusic(allMusics, new Song("title", new Duration(0, 0),
-                                                                "authors", new Date(), "genre",
+                                                doUser.addMusic(allMusics, new Song("MySong", new Duration(0, 0),
+                                                                "myAuthor", new Date(), "myGenre",
                                                                 new Lyrics("lyrics.txt")));
                                         }
                                         break;
 
                                 case "2":
-                                        doUser.updateMusic("title", "new title", new Duration(0, 1),
-                                                        "new authors", new Date(), "new genre");
+                                        doUser.updateMusic("MySong", "MyNewSong", new Duration(1, 0),
+                                                        "myNewAuthors", new Date(), "myNewGenre");
                                         break;
 
                                 case "3":
-                                        doUser.removeMusic("title");
+                                        doUser.removeMusic("MyMusicalInstrument");
                                         break;
 
                                 case "4":
@@ -284,9 +297,9 @@ public class MusicManager {
                                         System.out.print("Enter Music Title: ");
                                         String title = scanner.nextLine();
                                         StructMusic tempMusic = doUser.searchMusic(title);
-                                        if (tempMusic != null) {
-                                                System.out.println(tempMusic.toString());
-                                        }
+                                        if (tempMusic != null)
+                                                tempMusic.printMusic();
+                                        ;
                                         break;
                         }
                 }

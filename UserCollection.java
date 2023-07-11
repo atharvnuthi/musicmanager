@@ -15,7 +15,6 @@ public class UserCollection {
         for (User u : allUsers) {
             if (u.getLogin().equals(login)) {
                 userExists = true;
-                System.out.println("User already exist");
                 return false;
             }
         }
@@ -37,9 +36,9 @@ public class UserCollection {
         return null;
     }
 
-    public User searchUser(String login){
-        for (User u : allUsers){
-            if (u.getLogin().equals(login)){
+    public User searchUser(String login) {
+        for (User u : allUsers) {
+            if (u.getLogin().equals(login)) {
                 return u;
             }
         }

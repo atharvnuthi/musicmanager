@@ -24,6 +24,17 @@ public abstract class StructMusic {
                 + genre;
     }
 
+    public void printMusic() {
+        System.out.println("--------------------");
+        System.out.println("MUSIC_ID: " + this.id);
+        System.out.println("Name: " + this.title);
+        System.out.println("Duration: " + this.duration.getMin() + ":" + this.duration.getSec() + " min");
+        System.out.println("Authors: " + this.authors);
+        System.out.println("Date: " + this.date.toString().substring(0, 10).replace("-", "/").replace(" ", "/"));
+        System.out.println("Genre: " + this.genre);
+        System.out.println("--------------------");
+    }
+
     public int getId() {
         return id;
     }
